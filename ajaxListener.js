@@ -199,6 +199,7 @@ function ProcessPhoneDetails(phoneNumber, phones, imageUrl, currentCustomerImage
     if (i < phones.length) {
         var formattedLastDispositionDate = "";
         var lastDispositionDate = phones[i].dtLastDisposition;
+        var dispositionCreatorUsername = phones[i].DispositionCreatorUsername;
         if(lastDispositionDate != null) {
             formattedLastDispositionDate = constructFormattedLastDispositionDate(lastDispositionDate);
         }
@@ -206,7 +207,7 @@ function ProcessPhoneDetails(phoneNumber, phones, imageUrl, currentCustomerImage
             return {
                 imageUrl: currentCustomerImage,
                 removeAjax: true,
-                altText: formattedLastDispositionDate + 'Current client'
+                altText: formattedLastDispositionDate + 'Current client' + getDispositionUserName(dispositionCreatorUsername)
             }
         } else if (phones[i].eDispositionID == 16) {
             var purpleImageTxt = "";
@@ -221,7 +222,7 @@ function ProcessPhoneDetails(phoneNumber, phones, imageUrl, currentCustomerImage
             return {
                 imageUrl: purpleImageUrl,
                 removeAjax: false,
-                altText: formattedLastDispositionDate + purpleImageTxt
+                altText: formattedLastDispositionDate + purpleImageTxt + getDispositionUserName(dispositionCreatorUsername)
             }
         } else if (phones[i].eDispositionID == 1 || phones[i].eDispositionID == 4 || phones[i].eDispositionID == 8 || phones[i].eDispositionID == 512
             || phones[i].eDispositionID == 32768 || phones[i].eDispositionID == 32770 || phones[i].eDispositionID == 32775 || phones[i].eDispositionID == 32776 || phones[i].eDispositionID == 32777 ) {
@@ -262,7 +263,7 @@ function ProcessPhoneDetails(phoneNumber, phones, imageUrl, currentCustomerImage
             return {
                 imageUrl: dncImage,
                 removeAjax: false,
-                altText: formattedLastDispositionDate + dncImageText
+                altText: formattedLastDispositionDate + dncImageText + getDispositionUserName(dispositionCreatorUsername)
             }
         } else if (phones[i].eDispositionID != null) {
             var reason = "";
@@ -317,7 +318,7 @@ function ProcessPhoneDetails(phoneNumber, phones, imageUrl, currentCustomerImage
             return {
                 imageUrl: despositionImage,
                 removeAjax: false,
-                altText: formattedLastDispositionDate + reason
+                altText: formattedLastDispositionDate + reason + getDispositionUserName(dispositionCreatorUsername)
             }
         } else {
             // nothing, let go into default below
@@ -427,6 +428,14 @@ function formatAMPM(date) {
     minutes = minutes < 10 ? '0'+minutes : minutes;
     var strTime = hours + ':' + minutes + ' ' + ampm;
     return strTime;
+}
+
+function getDispositionUserName(dispositionUserName) {
+    if(dispositionUserName) {
+        return " (" + dispositionUserName + ")";
+    } else {
+        return "";
+    }
 }
 
 document.addEventListener('yourCustomEvent', function (e) {
