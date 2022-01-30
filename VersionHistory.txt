@@ -1,0 +1,67 @@
+version: "2018.9.11.1"
+-- Description: Fixed the issue where inconsistent icons were displayed on Google Search and on Manager portal.
+-- Issue: Code uses promises to display the icons. Promise.all expects all passed promises to be executed
+          successfully but some promises were failing hence UpdatePhoneDetails function was not called.
+-- Solution: Promise failure scenario was not actually a failure so called Promise' resolve function (which means successful)
+             on failed promises as well and that fixed the issue.
+
+version: "2018.9.20.1"
+-- Description: Added a FilterURLMask which stops the Chrome Extension to run on some pages.
+-- Issue: Chrome Extension blindly replaces all phone numbers with formatted number and an icon. This becomes troublesome when
+          users send some SMS to prospect clients as the extension replaces the phone number with icon.
+-- Solution: On the Extension's options page added a text box where the user can enter the FilterURLMask separated by pipe "|".
+             Code will read it in the code and will stop the Extension from running if the current URL matches the Mask.
+
+version: "2018.9.21.1"
+--Description: Earlier added FilterURLMask for URL localsplash.com which blocked the extension on all localsplash URLs.
+--Issue: Adding FilterURLMask for localsplash.com blocked the extension on URLs like manager.localspalsh.com and my.localsplash.com
+--Solution: Removed the permanent FilterURLMask for URL localsplash.com and added very specific masks for URLs which we actually
+            want to block.
+
+version: "2018.10.02.1"
+--Description: Added permanent FilterURLMask for Gmail.
+--Issue: Email signature on Gmail was showing some garbled texts and image. It was happening because when saving the signature
+         those garbled images and texts were getting saved.
+--Solution: Blocked the extension on "mail.google.com" URL.
+
+version: "2019.11.15.1"
+--Description: Fixed issue where after sorting reports incorrect icons were displayed.
+--Issue: After clicking on column header the data is changed by an AJAX call but new call to GetPhones endpoint is not getting made.
+         This is resulting into all numbers being displayed with Green Icons which is default.
+--Solution: Called Promise' resolve function which will trigger AJAX call to GetPhone endpoint with new phone numbers on the page.
+
+version: "2019.11.26.1"
+--Description: Google have recently changed their App publishing guideline saying App must request minimal possible permissions.
+--Issue: Currently the App is requesting to run on all websites which according to Google guideline is an excess privilege which must be narrowed.
+--Solution: Instead of whitelisting all websites in the world, whitelisted the ones on this this App is used.
+
+version: "2019.11.27.1"
+--Description: Because of Google's stringent review policy, we have narrowed down the App permissions to each individual
+               website. Hence we need to whitelist more websites.
+--Issue: Whitelist homeadvisor.com, bbb.org and yelp.com
+--Solution: Whitelisted them.
+
+version: "2019.12.03.1"
+--Description: Because of Google's stringent review policy, we have to narrow down the App permissions.
+--Issue: Remove unnecessary permissions.
+--Solution: Removed unlimited storage and debugger permissions.
+
+version: "2019.12.10.1"
+--Description: Whitelist more domains on which Extension will run.
+--Issue: Whitelist more domains on which Extension will run.
+--Solution: Whitelisted URLs mentioned here https://docs.google.com/spreadsheets/d/1PA7WHB2sTJpuqy6afoXMY-2hLU7RxMK79HAhSqdhQRQ/edit#gid=0
+
+version: "2020.02.26.1"
+--Description: Blacklist gmail.
+--Issue: Email signature is getting messed up.
+--Solution: Blacklisted mail.google.com.
+
+version: "2020.03.12.1"
+--Description: Add timestamp to Disposition Hover Text.
+--Issue: Add a timestamp that indicates when each disposition was set. e.g, each time a new disposition is set, a new time stamp is displayed upon hover.
+--Solution: Added feature by reading the disposition timestamp.
+"2020.03.22.1"--Changed the vicidial to vicibox.office.relevantads.com on 2 files ajaxListener.js and options.js
+
+Version: "2021.10.20.1"
+--Description: Add time in the hover text.
+--Solution: Formatted the date and displayed it.

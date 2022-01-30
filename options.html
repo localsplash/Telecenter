@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>US Phone call plugin Options</title>
+    <meta charset="utf-8" />
+    <style>
+        body {
+            padding: 10px;
+        }
+
+        #advanced-expander {
+            cursor: pointer;
+        }
+
+        .advanced-block {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>Options</h2>
+    <div>
+        <label>PBX Internal Extension:</label><br />
+        <input id="pbxExten" type="text" style="width:300px;" />
+    </div>
+    <br />
+    <h2>Advanced settings <span id="advanced-expander">+</span></h2>
+    <div class="advanced-block" id="advanced-block">
+        <div>
+            <label>Ajax base address:</label><br />
+            <input id="c2cURL" type="text" style="width:300px;" />
+        </div>
+        <div>
+            <label>Phone number regex:</label><br />
+            <input id="regex" type="text" style="width:300px;" />
+        </div>
+        <div>
+            <label>Plugin delay:</label><br />
+            <input id="loadDelay" type="text" style="width:300px;" />
+        </div>
+        <h2>Test regex</h2>
+        <div>
+            <label>Phone Number to test</label><br />
+            <input id="phone" type="text" style="width:300px;" />
+        </div>
+    </div>
+    <div id="status" style="color:green;"></div>
+    <button id="save">Save</button>
+    <a href="#" id="resetDefaults" type="text/html" style="text-align:right">Reset to defaults</a>
+    <script src="options.js"></script>
+</body>
+</html>

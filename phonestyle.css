@@ -1,0 +1,25 @@
+﻿.rlv-container {
+    position: relative;
+}
+
+.rlv-menu-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    z-index: 100000;
+    background: #fff;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+    .rlv-menu-container a {
+        padding: 3px;
+        display: block;
+        font-size: 14px;
+    }
+
+        .rlv-menu-container a:hover {
+            background-color: darkgray;
+        }
