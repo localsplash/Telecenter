@@ -8,7 +8,7 @@
   "name": "Relevant Telecenter Dialer",
   "short_name": "RATelecenter",
   "description": "Allows single-click calling, business listing research and Manager CRM integration for telecenter digital marketing representatives.",
-  "version": "2022.2",
+  "version": "2022.3",
   "options_ui": {
     "page": "options.html",
     "chrome_style": true
@@ -38,6 +38,10 @@
         "*://*.brownbook.net/*", "*://*.angi.com/*", "*://*.ehardhat.com/*", "*://*.yellopagecity.com/*", "*://*.usdirectory.com/*" ],
       "js": [ "contentscript.js" ],
       "exclude_matches": ["*://mail.google.com/*", "*://chat.google.com/*"]
+    }, {
+      "matches": ["*://*.google.com/search*"],
+      "js": ["googleWebPagehHack.js"],
+      "runAt": "end"
     }
   ]
 }
