@@ -20,7 +20,7 @@ function init() {
                 if (regex.test(this.responseText)) {
                     setTimeout(function () {
                         find_textNodesWithPhones(settings.regex, settings.c2cURL, settings.pbxExten, settings.imageUrl,
-                            settings.currentCustomerImageUrl, settings.dncImageUrl, settings.dispositionImageUrl, settings.purpleImageUrl);
+                            settings.currentCustomerImageUrl, settings.dncImageUrl, settings.dispositionImageUrl, settings.purpleImageUrl, settings.errorImageUrl);
                     }, 100)
 
                 }
@@ -31,19 +31,19 @@ function init() {
 
     setTimeout(function () {
         find_textNodesWithPhones(settings.regex, settings.c2cURL, settings.pbxExten, settings.imageUrl,
-            settings.currentCustomerImageUrl, settings.dncImageUrl, settings.dispositionImageUrl, settings.purpleImageUrl);
+            settings.currentCustomerImageUrl, settings.dncImageUrl, settings.dispositionImageUrl, settings.purpleImageUrl, settings.errorImageUrl);
     }, settings.loadDelay ? (parseInt(settings.loadDelay) * 1000) : 3000);
 }
 
 
-function find_textNodesWithPhones(regexString, baseAddress, pbxExten, imageUrl, currentCustomerImageUrl, dncImageUrl, dispositionImageUrl, purpleImageUrl) {
+function find_textNodesWithPhones(regexString, baseAddress, pbxExten, imageUrl, currentCustomerImageUrl, dncImageUrl, dispositionImageUrl, purpleImageUrl, errorImageUrl) {
     var queue = [document.body];
     var curr;
     var regex = new RegExp(regexString);
     var globalRegex = new RegExp(regexString, 'g');
     var fullMatchRegex = new RegExp("^" + regexString + "$");
     var imageCode = '<span class="rlv-container">'
-        + '<img src="{imageUrl}" height="15" width="15" class="rlv-phone-call" data-preview="NO" data-phone-number="{phoneDigits}" style="cursor:pointer;" />'
+        + '<img src="{imageUrl}" height="15" width="15" class="rlv-phone-call" data-preview="NO" data-phone-number="{phoneDigits}" style="cursor:pointer;" title="Network Error" />'
         + '<div class="rlv-menu-container"><a href="#" data-preview="NO" data-phone-number="{phoneDigits}" class="rlv-phone-call">Call</a>'
         + '<a href="#" data-preview="YES" data-phone-number="{phoneDigits}" class="rlv-phone-call">Preview</a>'
         + '<a href="https://www.google.com/search?q={phoneDigits}" target="goog">Search Phone on Google</a>'
@@ -78,7 +78,7 @@ function find_textNodesWithPhones(regexString, baseAddress, pbxExten, imageUrl, 
                                     found = true;
                                     // fill template with required data
                                     var phoneDigits = resCopy[j].replace(/[^0-9]/g, '');
-                                    var imgTag = imageCode.replace('{imageUrl}', imageUrl);
+                                    var imgTag = imageCode.replace('{imageUrl}', errorImageUrl);
                                     imgTag = imgTag.replace(/{phoneNumber}/g, resCopy[j]);
                                     imgTag = imgTag.replace(/{phoneDigits}/g, phoneDigits);
                                     currCopy.innerHTML = currCopy.innerHTML.replace(resCopy[j], resCopy[j] + imgTag);

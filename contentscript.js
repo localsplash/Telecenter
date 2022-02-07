@@ -7,6 +7,7 @@ chrome.storage.sync.get(function (items) {
     var phoneDNCImageUrl = chrome.extension.getURL('phone-dnc.png');
     var phoneDispositionImageUrl = chrome.extension.getURL('phone-disposition.png');
     var phonePurple = chrome.extension.getURL('phone-purple.png');
+    var errorImageUrl = chrome.extension.getURL('error.png');
 
     appendStyle(styleurl);
     injectScript(scripturl, 'body');
@@ -22,6 +23,7 @@ chrome.storage.sync.get(function (items) {
             dncImageUrl: phoneDNCImageUrl,
             dispositionImageUrl: phoneDispositionImageUrl,
             purpleImageUrl: phonePurple,
+            errorImageUrl: errorImageUrl,
             regex: items.regex,
             c2cURL: items.c2cURL,
             pbxExten: items.pbxExten,
