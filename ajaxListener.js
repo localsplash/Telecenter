@@ -201,7 +201,8 @@ function ProcessPhoneDetails(phoneNumber, phones, imageUrl, currentCustomerImage
         var lastDispositionDate = phones[i].dtLastDisposition;
         var dispositionCreatorUsername = phones[i].DispositionCreatorUsername;
         if(lastDispositionDate != null) {
-            formattedLastDispositionDate = constructFormattedLastDispositionDate(lastDispositionDate);
+            var timezone = phones[i].TimeZone;
+            formattedLastDispositionDate = constructFormattedLastDispositionDate(lastDispositionDate, timezone);
         }
         if (phones[i].bIsPaying == 1) {
             return {
@@ -401,7 +402,7 @@ function UpdatePhoneDetails(imageUrl, currentCustomerImageUrl, dncImageUrl, disp
     });
 }
 
-function constructFormattedLastDispositionDate(isoFormatDate) {
+function constructFormattedLastDispositionDate(isoFormatDate, timezone) {
     var date = new Date(isoFormatDate);
     var year = date.getFullYear().toString().substr(-2);
     var month = date.getMonth() + 1;
@@ -416,7 +417,12 @@ function constructFormattedLastDispositionDate(isoFormatDate) {
 
     var time = formatAMPM(date);
 
-    return month + '/' + dt + '/' + year + " " + time + ' - ';
+    var formattedTimezone = "PST";
+    if(timezone && timezone.split("(").length > 1 && timezone.split(")").length > 1) {
+        formattedTimezone = timezone.split("(")[1].split(")")[0];
+    }
+
+    return month + '/' + dt + '/' + year + " " + time + + " " + formattedTimezone + ' - ';
 }
 
 function formatAMPM(date) {
