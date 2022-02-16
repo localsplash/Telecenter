@@ -28,7 +28,7 @@ function restore_options() {
     // Use default value color = 'red' and likesColor = true.
     chrome.storage.sync.get({
         regex: '\\(?([0-9]{3})\\)?[.-\\s]+?[0-9]{3}[.-\\s]+?[0-9]{4}',
-        c2cURL: 'https://vicivoip.localsplash.com/agc/api.php?source=test&user={{EXTEN}}&pass=localsplash12&agent_user={{EXTEN}}&function=external_dial&value={{PHONEDIAL}}&phone_code=1&search=YES&focus=YES',
+        c2cURL: 'https://dayone.localsplash.com/agc/api.php?source=test&user={{EXTEN}}&pass=localsplash12&agent_user={{EXTEN}}&function=external_dial&value={{PHONEDIAL}}&phone_code=1&search=YES&focus=YES',
         pbxExten: "",
         loadDelay: "3",
         lastSyncDate: defaultLastSyncDate
