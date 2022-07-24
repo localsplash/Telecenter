@@ -1,13 +1,13 @@
 chrome.storage.sync.get(function (items) {
     console.log('running plugin' + items);
-    var styleurl = chrome.extension.getURL('phonestyle.css');
-    var scripturl = chrome.extension.getURL('ajaxListener.js');
-    var imageUrl = chrome.extension.getURL('phone.png');
-    var phoneCurrentCustomerUrl = chrome.extension.getURL('phone-currentcustomer.png');
-    var phoneDNCImageUrl = chrome.extension.getURL('phone-dnc.png');
-    var phoneDispositionImageUrl = chrome.extension.getURL('phone-disposition.png');
-    var phonePurple = chrome.extension.getURL('phone-purple.png');
-    var errorImageUrl = chrome.extension.getURL('error.png');
+    var styleurl = chrome.runtime.getURL('phonestyle.css');
+    var scripturl = chrome.runtime.getURL('ajaxListener.js');
+    var imageUrl = chrome.runtime.getURL('phone.png');
+    var phoneCurrentCustomerUrl = chrome.runtime.getURL('phone-currentcustomer.png');
+    var phoneDNCImageUrl = chrome.runtime.getURL('phone-dnc.png');
+    var phoneDispositionImageUrl = chrome.runtime.getURL('phone-disposition.png');
+    var phonePurple = chrome.runtime.getURL('phone-purple.png');
+    var errorImageUrl = chrome.runtime.getURL('error.png');
 
     appendStyle(styleurl);
     injectScript(scripturl, 'body');

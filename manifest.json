@@ -1,19 +1,19 @@
 {
-  "manifest_version": 2,
-  "browser_action": {},
+  "manifest_version": 3,
+  "action": {},
   "background": {
-    "scripts": ["background-script.js"],
-    "persistent": false
+    "service_worker": "background-script.js"
   },
   "name": "Relevant Telecenter Dialer",
   "short_name": "RATelecenter",
   "description": "Allows single-click calling, business listing research and Manager CRM integration for telecenter digital marketing representatives.",
-  "version": "2022.8",
-  "options_ui": {
-    "page": "options.html",
-    "chrome_style": true
-  },
-  "web_accessible_resources": [ "phone.png", "phone-currentcustomer.png", "phone-disposition.png", "phone-dnc.png", "phone-purple.png", "phonestyle.css", "ajaxListener.js", "helper_functions.js", "error.png" ],
+  "version": "2022.9",
+  "web_accessible_resources": [
+    {
+      "resources": [ "phone.png", "phone-currentcustomer.png", "phone-disposition.png", "phone-dnc.png", "phone-purple.png", "phonestyle.css", "ajaxListener.js", "helper_functions.js", "error.png" ],
+      "matches": ["<all_urls>"]
+    }
+  ],
   "options_page": "options.html",
   "permissions": [
     "storage",
