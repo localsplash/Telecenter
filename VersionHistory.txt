@@ -65,3 +65,19 @@ version: "2020.03.12.1"
 Version: "2021.10.20.1"
 --Description: Add time in the hover text.
 --Solution: Formatted the date and displayed it.
+
+Version: "2022.11.15.1"
+--Description: Whitelist more domains on which Extension will run.
+--Issue: Whitelist more domains on which Extension will run.
+--Solution: Whitelisted URLs mentioned below:
+----"*://*.home8.org/*",
+----"*://*.cmac.ws/*",
+----"*://*.cmac.ws/*",
+----"*://*.builderquotes.com/*",
+----"*://*.painterbids.com/*",
+----"*://*.nachi.org/*",
+----"*://*.homeyou.com/*",
+----"*://*.whereorg.com/*",
+----"*://*.pennysaverusa.com/*",
+----"*://*.contractorsup.com/*",
+----"*://*.claimspages.com/*

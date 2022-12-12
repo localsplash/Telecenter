@@ -7,11 +7,23 @@
   "name": "Relevant Telecenter Dialer",
   "short_name": "RATelecenter",
   "description": "Allows single-click calling, business listing research and Manager CRM integration for telecenter digital marketing representatives.",
-  "version": "2022.9",
+  "version": "2022.11.15.1",
   "web_accessible_resources": [
     {
-      "resources": [ "phone.png", "phone-currentcustomer.png", "phone-disposition.png", "phone-dnc.png", "phone-purple.png", "phonestyle.css", "ajaxListener.js", "helper_functions.js", "error.png" ],
-      "matches": ["<all_urls>"]
+      "resources": [
+        "phone.png",
+        "phone-currentcustomer.png",
+        "phone-disposition.png",
+        "phone-dnc.png",
+        "phone-purple.png",
+        "phonestyle.css",
+        "ajaxListener.js",
+        "helper_functions.js",
+        "error.png"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
     }
   ],
   "options_page": "options.html",
@@ -26,21 +38,78 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.facebook.com/*", "*://*.relevantads.com/*", "*://*.localsplash.com/*", "*://*.google.com/*",
-        "*://*.zillow.com/*", "*://*.yelp.com/*", "*://*.yelp.ca/*", "*://*.homeadvisor.com/*", "*://*.porch.com/*",
-        "*://*.houzz.com/*", "*://*.whitepages.com/*", "*://*.yellowpages.com/*", "*://*.angieslist.com/*",
-        "*://*.bbb.org/*", "*://*.theknot.com/*", "*://*.thumbtack.com/*", "*://*.manta.com/*", "*://*.care.com/*",
-        "*://*.foursquare.com/*", "*://*.weddingwire.com/*", "*://*.avvo.com/*", "*://*.411.com/*", "*://*.superpages.com/*",
-        "*://*.local.com/*", "*://*.merchantcircle.com/*", "*://*.dexknows.com/*", "*://*.yellowbook.com/*",
-        "*://*.chamberofcommerce.com/*", "*://*.citysearch.com/*", "*://*.hotfrog.com/*", "*://*.cylex.us.com/*",
-        "*://*.kudzu.com/*", "*://*.b2byellowpages.com/*", "*://*.yellowbot.com/*", "*://*.yellowpagesgoesgreen.org/*",
-        "*://*.elocal.com/*", "*://*.ezlocal.com/*", "*://*.judysbook.com/*", "*://*.2findlocal.com/*",
-        "*://*.brownbook.net/*", "*://*.angi.com/*", "*://*.ehardhat.com/*", "*://*.yellopagecity.com/*", "*://*.usdirectory.com/*" ],
-      "js": [ "contentscript.js" ],
-      "exclude_matches": ["*://mail.google.com/*", "*://chat.google.com/*"]
-    }, {
-      "matches": ["*://*.google.com/search*"],
-      "js": ["googleWebPagehHack.js"],
+      "matches": [
+        "*://*.facebook.com/*",
+        "*://*.relevantads.com/*",
+        "*://*.localsplash.com/*",
+        "*://*.google.com/*",
+        "*://*.zillow.com/*",
+        "*://*.yelp.com/*",
+        "*://*.yelp.ca/*",
+        "*://*.homeadvisor.com/*",
+        "*://*.porch.com/*",
+        "*://*.houzz.com/*",
+        "*://*.whitepages.com/*",
+        "*://*.yellowpages.com/*",
+        "*://*.angieslist.com/*",
+        "*://*.bbb.org/*",
+        "*://*.theknot.com/*",
+        "*://*.thumbtack.com/*",
+        "*://*.manta.com/*",
+        "*://*.care.com/*",
+        "*://*.foursquare.com/*",
+        "*://*.weddingwire.com/*",
+        "*://*.avvo.com/*",
+        "*://*.411.com/*",
+        "*://*.superpages.com/*",
+        "*://*.local.com/*",
+        "*://*.merchantcircle.com/*",
+        "*://*.dexknows.com/*",
+        "*://*.yellowbook.com/*",
+        "*://*.chamberofcommerce.com/*",
+        "*://*.citysearch.com/*",
+        "*://*.hotfrog.com/*",
+        "*://*.cylex.us.com/*",
+        "*://*.kudzu.com/*",
+        "*://*.b2byellowpages.com/*",
+        "*://*.yellowbot.com/*",
+        "*://*.yellowpagesgoesgreen.org/*",
+        "*://*.elocal.com/*",
+        "*://*.ezlocal.com/*",
+        "*://*.judysbook.com/*",
+        "*://*.2findlocal.com/*",
+        "*://*.brownbook.net/*",
+        "*://*.angi.com/*",
+        "*://*.ehardhat.com/*",
+        "*://*.yellopagecity.com/*",
+        "*://*.usdirectory.com/*",
+        "*://*.home8.org/*",
+        "*://*.cmac.ws/*",
+        "*://*.cmac.ws/*",
+        "*://*.builderquotes.com/*",
+        "*://*.painterbids.com/*",
+        "*://*.nachi.org/*",
+        "*://*.homeyou.com/*",
+        "*://*.whereorg.com/*",
+        "*://*.pennysaverusa.com/*",
+        "*://*.contractorsup.com/*",
+        "*://*.claimspages.com/*"
+      ],
+      "js": [
+        "contentscript.js"
+      ],
+      "exclude_matches": [
+        "*://mail.google.com/*",
+        "*://chat.google.com/*"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.google.com/search*"
+      ],
+      "js": [
+        "googleWebPagehHack.js"
+      ],
       "runAt": "end"
     }
   ]
