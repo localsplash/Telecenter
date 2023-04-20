@@ -81,3 +81,7 @@ Version: "2022.11.15.1"
 ----"*://*.pennysaverusa.com/*",
 ----"*://*.contractorsup.com/*",
 ----"*://*.claimspages.com/*
+
+Version: "2023.04.20.2"
+--Description: Right click option does not work
+--Issue: When clicking on the right click on your mouse there is no pop-up option
