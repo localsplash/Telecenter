@@ -222,9 +222,11 @@ function contextMenu(event) {
 
   event.stopPropagation();
   event.preventDefault();
-
+//alert("alert bc");
+//element.style.height="20px";
   // show element
   element.style.display = "block";
+
   if (areWeOnGoogleSearchPage()) {
     ContainNoneParentNodes(gElement);
     // while (true) {
@@ -236,6 +238,9 @@ function contextMenu(event) {
     //   "none";
     // element.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.style.contain =
     //   "none";
+  }
+  else if (areWeOnFacebookIntroSection(element)){
+    addSpaceDiv(element);
   }
 
   // add event listeners to hide context menu
@@ -253,6 +258,9 @@ function contextMenu(event) {
     //     "contain"
     //   );
     }
+    else if (areWeOnFacebookIntroSection(element)){
+      removeDivSpace(element);
+    }
   };
   document.addEventListener("contextmenu", function () {
     element.style.display = "none";
@@ -268,8 +276,24 @@ function contextMenu(event) {
     //     "contain"
     //   );
     }
+    else if (areWeOnFacebookIntroSection(element)){
+      removeDivSpace(element);
+    }
   });
   return false;
+}
+function addSpaceDiv(element){
+  var newDiv = document.createElement('div');
+  newDiv.innerHTML = "";
+  newDiv.className="rlv-extra-space"
+  newDiv.style.height="86px";
+  element.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.insertBefore(newDiv,element.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.nextSibling);
+}
+function removeDivSpace(element){
+  if(element.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.nextSibling.classList.contains('rlv-extra-space'))
+  {
+    element.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.nextSibling.remove()	
+  }
 }
 function ContainNoneParentNodes(gElement){
     var els = [];
@@ -312,6 +336,18 @@ function areWeOnGoogleSearchPage() {
     window.location.hostname.indexOf(".google") != -1 &&
     window.location.pathname.indexOf("search") != -1
   );
+}
+
+function areWeOnFacebookIntroSection(element) {
+  try{
+  return (
+    window.location.hostname.indexOf(".facebook") != -1 &&
+    element.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.classList.contains('x1ja2u2z')
+  );
+  }catch(e)
+  {
+    return false;
+  }
 }
 function stopLinkClickPropargation(event) {
   event.stopPropagation();

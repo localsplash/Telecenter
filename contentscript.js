@@ -149,6 +149,7 @@ function sendRequest(event) {
 
 // function to append context menu on phone icon right click
 function contextMenu(event) {
+    alert("hit bc")
     var element = this.parentNode.getElementsByClassName('rlv-menu-container')[0];
     var boundingRect = this.parentNode.getBoundingClientRect();
     element.style.top = boundingRect.top + 'px';
@@ -164,7 +165,7 @@ function contextMenu(event) {
     event.preventDefault();
 
     // show element
-    element.style.display = 'block';
+    //element.style.display = 'block';
 
     // add event listeners to hide context menu
     document.onclick = function () {
