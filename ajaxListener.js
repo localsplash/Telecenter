@@ -424,9 +424,7 @@ function ProcessPhoneDetails(
       phones[i].eDispositionID == 512 ||
       phones[i].eDispositionID == 32768 ||
       phones[i].eDispositionID == 131072 ||
-      phones[i].eDispositionID == 32775 ||
-      phones[i].eDispositionID == 4194304 ||
-      phones[i].eDispositionID == 32777
+      phones[i].eDispositionID == 4194304
     ) {
       var dncImageText = "";
       switch (phones[i].eDispositionID) {
@@ -448,14 +446,8 @@ function ProcessPhoneDetails(
         case 131072:
           dncImageText = "Not a Business";
           break;
-        case 32775:
-          dncImageText = "HomeAdvisor Recording";
-          break;
         case 4194304:
           dncImageText = "Tracking Number";
-          break;
-        case 32777:
-          dncImageText = "Deactivated";
           break;
         default:
           dncImageText = "unknown disposition!";
