@@ -423,9 +423,9 @@ function ProcessPhoneDetails(
       phones[i].eDispositionID == 8 ||
       phones[i].eDispositionID == 512 ||
       phones[i].eDispositionID == 32768 ||
-      phones[i].eDispositionID == 32770 ||
+      phones[i].eDispositionID == 131072 ||
       phones[i].eDispositionID == 32775 ||
-      phones[i].eDispositionID == 32776 ||
+      phones[i].eDispositionID == 4194304 ||
       phones[i].eDispositionID == 32777
     ) {
       var dncImageText = "";
@@ -445,13 +445,13 @@ function ProcessPhoneDetails(
         case 32768:
           dncImageText = "Out of Business";
           break;
-        case 32770:
+        case 131072:
           dncImageText = "Not a Business";
           break;
         case 32775:
           dncImageText = "HomeAdvisor Recording";
           break;
-        case 32776:
+        case 4194304:
           dncImageText = "Tracking Number";
           break;
         case 32777:
@@ -500,19 +500,19 @@ function ProcessPhoneDetails(
         case 16384:
           reason = "Booked";
           break;
-        case 32769:
+        case 65536:
           reason = "On Hold";
           break;
-        case 32771:
+        case 262144:
           reason = "Gatekeeper";
           break;
-        case 32772:
+        case 524288:
           reason = "Future Interest";
           break;
-        case 32773:
+        case 1048576:
           reason = "Ranking First Page";
           break;
-        case 32774:
+        case 2097152:
           reason = "Language Barrier";
           break;
         default:
