@@ -95,3 +95,8 @@ Version: "2023.08.17.2"
 --Description: Issue with extension working for Facebook
 --Issue: The C2C extension not working properly for Facebook.com
 --Solution: External Dev fix
+
+Version: "2023.11.29.1"
+--Description: Update Disposition values Telecenter Chrome Extension - Azure DevOps (#21450)
+--Issue: Update Disposition values Telecenter Chrome Extension 
+--Solution: Update Disposition values Telecenter Chrome Extension - Azure DevOps (#21450) Follow up with #16857
