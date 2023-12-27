@@ -24,3 +24,14 @@ chrome.tabs.onUpdated.addListener(function(tabId){
         }
     });
 });
+chrome.runtime.onMessage.addListener(function (req, sender, reply) {
+    let msg = req.msg;
+    if (msg == "loadAjaxListner") {
+        chrome.scripting.executeScript({
+            target: { tabId: sender.tab.id },
+            files: ["ajaxListener.js"]
+          });
+    }
+    
+    return true;
+  });

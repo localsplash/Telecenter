@@ -100,3 +100,8 @@ Version: "2023.11.29.1"
 --Description: Update Disposition values Telecenter Chrome Extension - Azure DevOps (#21450)
 --Issue: Update Disposition values Telecenter Chrome Extension 
 --Solution: Update Disposition values Telecenter Chrome Extension - Azure DevOps (#21450) Follow up with #16857
+
+Version: "2023.12.27.1"
+--Description: Telecenter Extension security work-around - Implement Content Script + Service Worker - Azure DevOps (#21516)
+--Issue: Telecenter Extension security work-around 
+--Solution: Implement Content Script + Service Worker - Azure DevOps (#21516)

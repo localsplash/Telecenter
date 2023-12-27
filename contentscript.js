@@ -1,3 +1,4 @@
+
 chrome.storage.sync.get(function (items) {
     console.log('running plugin' + items);
     var styleurl = chrome.runtime.getURL('phonestyle.css');
@@ -8,9 +9,12 @@ chrome.storage.sync.get(function (items) {
     var phoneDispositionImageUrl = chrome.runtime.getURL('phone-disposition.png');
     var phonePurple = chrome.runtime.getURL('phone-purple.png');
     var errorImageUrl = chrome.runtime.getURL('error.png');
-
+ 
+    chrome.runtime.sendMessage({
+        msg: "loadAjaxListner"
+    });
     appendStyle(styleurl);
-    injectScript(scripturl, 'body');
+    // injectScript(scripturl, 'body');
     if (items.regex && items.c2cURL && items.pbxExten) {
 
         // add settings to hidden div on page
