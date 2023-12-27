@@ -105,3 +105,8 @@ Version: "2023.12.27.1"
 --Description: Telecenter Extension security work-around - Implement Content Script + Service Worker - Azure DevOps (#21516)
 --Issue: Telecenter Extension security work-around 
 --Solution: Implement Content Script + Service Worker - Azure DevOps (#21516)
+
+Version: "2023.12.27.2"
+--Description: Resolved #16857 and #21450 from AzureDevops
+--Issue: Resolved #16857 and #21450 from AzureDevops
+--Solution: Resolved #16857 and #21450 from AzureDevops
