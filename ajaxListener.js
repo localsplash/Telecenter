@@ -403,7 +403,7 @@ function ProcessPhoneDetails(
       var purpleImageTxt = "";
       switch (phones[i].eDispositionID) {
         case 16:
-          purpleImageTxt = "T.O.";
+          purpleImageTxt = "Transferred over made to Closer";
           break;
         default:
           purpleImageTxt = "unknown disposition!";
@@ -424,21 +424,28 @@ function ProcessPhoneDetails(
       phones[i].eDispositionID == 512 ||
       phones[i].eDispositionID == 32768 ||
       phones[i].eDispositionID == 131072 ||
-      phones[i].eDispositionID == 4194304
+      phones[i].eDispositionID == 4194304 ||
+      phones[i].eDispositionID == 1024 ||
+      phones[i].eDispositionID == 8388608 ||
+      phones[i].eDispositionID == 16777216 ||
+      phones[i].eDispositionID == 33554432 ||
+      phones[i].eDispositionID == 67108864 ||
+      phones[i].eDispositionID == 134217728 ||
+      phones[i].eDispositionID == 268435456
     ) {
       var dncImageText = "";
       switch (phones[i].eDispositionID) {
         case 1:
-          dncImageText = "DNC";
+          dncImageText = "Do Not Call";
           break;
         case 4:
           dncImageText = "Phone Disconnected";
           break;
         case 8:
-          dncImageText = "Multilocation";
+          dncImageText = "Location is not responsible for marketing";
           break;
         case 512:
-          dncImageText = "On Hold";
+          dncImageText = "7 Days";
           break;
         case 32768:
           dncImageText = "Out of Business";
@@ -448,6 +455,27 @@ function ProcessPhoneDetails(
           break;
         case 4194304:
           dncImageText = "Tracking Number";
+          break;
+        case 1024:
+          dncImageText = "Call Back";
+          break;   
+        case 8388608:
+          dncImageText = "Bad Category To Call";
+          break;   
+        case 16777216:
+          dncImageText = "Booked";
+          break; 
+        case 33554432:
+          dncImageText = "SALE- DNC";
+          break;
+        case 67108864:
+          dncImageText = "Spanish Speaking Opener";
+          break;
+        case 134217728:
+          dncImageText = "Inbound Call Back";
+          break;
+        case 268435456:
+          dncImageText = "Scheduled Callback";
           break;
         default:
           dncImageText = "unknown disposition!";
@@ -466,40 +494,40 @@ function ProcessPhoneDetails(
       var reason = "";
       switch (phones[i].eDispositionID) {
         case 2:
-          reason = "Pitch Attempted";
+          reason = "Scheduled Call Back";
           break;
         case 32:
-          reason = "Email requested";
+          reason = "Email follow up requested";
           break;
         case 64:
-          reason = "Not interested";
+          reason = "Prospect not interested";
           break;
         case 128:
-          reason = "Hang up";
+          reason = "Prospect hung up unexpectedly";
           break;
         case 256:
-          reason = "Done - Final Attempt";
+          reason = "Final attempt";
           break;
         case 2048:
-          reason = "Loss of Sale - Reviews";
+          reason = "Reviews";
           break;
         case 4096:
-          reason = "Future Interest - Call Back";
+          reason = "Call back";
           break;
         case 8192:
-          reason = "No Answer";
+          reason = "Sent to Voicemail";
           break;
         case 16384:
-          reason = "Booked";
+          reason = "Unknown dispo not found 16384";
           break;
         case 65536:
-          reason = "On Hold";
+          reason = "1 Day";
           break;
         case 262144:
           reason = "Gatekeeper";
           break;
         case 524288:
-          reason = "Future Interest";
+          reason = "In Contract";
           break;
         case 1048576:
           reason = "Ranking First Page";
