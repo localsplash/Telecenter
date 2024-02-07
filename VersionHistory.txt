@@ -110,3 +110,8 @@ Version: "2023.12.27.2"
 --Description: Resolved #16857 and #21450 from AzureDevops
 --Issue: Resolved #16857 and #21450 from AzureDevops
 --Solution: Resolved #16857 and #21450 from AzureDevops
+
+Version: "2024.02.07.1"
+--Description: Resolved - #21683 - C2C (Telcenter Chrome Ext) Ext Color Code Modifications
+--Issue: Resolved - #21683 - C2C (Telcenter Chrome Ext) Ext Color Code Modifications
+--Solution: Resolved - #21683 - C2C (Telcenter Chrome Ext) Ext Color Code Modifications
