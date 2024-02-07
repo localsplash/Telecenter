@@ -37,7 +37,15 @@ function init() {
               settings.dncImageUrl,
               settings.dispositionImageUrl,
               settings.purpleImageUrl,
-              settings.errorImageUrl
+              settings.errorImageUrl,
+              settings.phoneDNCImageUrl_tri_red,
+              settings.phoneDispositionImageUrl_tri_purple,
+              settings.phoneDispositionImageUrl_orange,
+              settings.phoneDispositionImageUrl_tri_red,
+              settings.phoneDispositionImageUrl_tri_blue,
+              settings.phoneDispositionImageUrl_yellow,
+              settings.phoneDispositionImageUrl_red,
+              settings.phoneDNCImageUrl_tri_black
             );
           }, 100);
         }
@@ -57,7 +65,15 @@ function init() {
         settings.dncImageUrl,
         settings.dispositionImageUrl,
         settings.purpleImageUrl,
-        settings.errorImageUrl
+        settings.errorImageUrl,
+        settings.phoneDNCImageUrl_tri_red,
+        settings.phoneDispositionImageUrl_tri_purple,
+        settings.phoneDispositionImageUrl_orange,
+        settings.phoneDispositionImageUrl_tri_red,
+        settings.phoneDispositionImageUrl_tri_blue,
+        settings.phoneDispositionImageUrl_yellow,
+        settings.phoneDispositionImageUrl_red,
+        settings.phoneDNCImageUrl_tri_black
       );
     },
     settings.loadDelay ? parseInt(settings.loadDelay) * 1000 : 3000
@@ -73,7 +89,15 @@ function find_textNodesWithPhones(
   dncImageUrl,
   dispositionImageUrl,
   purpleImageUrl,
-  errorImageUrl
+  errorImageUrl,
+  phoneDNCImageUrl_tri_red,
+  phoneDispositionImageUrl_tri_purple,
+  phoneDispositionImageUrl_orange,
+  phoneDispositionImageUrl_tri_red,
+  phoneDispositionImageUrl_tri_blue,
+  phoneDispositionImageUrl_yellow,
+  phoneDispositionImageUrl_red,
+  phoneDNCImageUrl_tri_black
 ) {
   var queue = [document.body];
   var curr;
@@ -175,7 +199,15 @@ function find_textNodesWithPhones(
       currentCustomerImageUrl,
       dncImageUrl,
       dispositionImageUrl,
-      purpleImageUrl
+      purpleImageUrl,
+      phoneDNCImageUrl_tri_red,
+      phoneDispositionImageUrl_tri_purple,
+      phoneDispositionImageUrl_orange,
+      phoneDispositionImageUrl_tri_red,
+      phoneDispositionImageUrl_tri_blue,
+      phoneDispositionImageUrl_yellow,
+      phoneDispositionImageUrl_red,
+      phoneDNCImageUrl_tri_black
     );
   });
 }
@@ -371,7 +403,15 @@ function ProcessPhoneDetails(
   currentCustomerImage,
   dncImage,
   despositionImage,
-  purpleImageUrl
+  purpleImageUrl,
+  phoneDNCImageUrl_tri_red,
+  phoneDispositionImageUrl_tri_purple,
+  phoneDispositionImageUrl_orange,
+  phoneDispositionImageUrl_tri_red,
+  phoneDispositionImageUrl_tri_blue,
+  phoneDispositionImageUrl_yellow,
+  phoneDispositionImageUrl_red,
+  phoneDNCImageUrl_tri_black
 ) {
   for (var i = 0; i < phones.length; i++) {
     if (phoneNumber == phones[i].IPhone) {
@@ -380,6 +420,7 @@ function ProcessPhoneDetails(
   }
 
   if (i < phones.length) {
+    console.log("phone desposition Id",phones[i].eDispositionID);
     var formattedLastDispositionDate = "";
     var lastDispositionDate = phones[i].dtLastDisposition;
     var dispositionCreatorUsername = phones[i].DispositionCreatorUsername;
@@ -403,7 +444,7 @@ function ProcessPhoneDetails(
       var purpleImageTxt = "";
       switch (phones[i].eDispositionID) {
         case 16:
-          purpleImageTxt = "Transferred over made to Closer";
+          purpleImageTxt = "TO - Open Manager";
           break;
         default:
           purpleImageTxt = "unknown disposition!";
@@ -431,9 +472,11 @@ function ProcessPhoneDetails(
       phones[i].eDispositionID == 33554432 ||
       phones[i].eDispositionID == 67108864 ||
       phones[i].eDispositionID == 134217728 ||
-      phones[i].eDispositionID == 268435456
+      phones[i].eDispositionID == 268435456 
+      
     ) {
       var dncImageText = "";
+      let imagePath=dncImage;
       switch (phones[i].eDispositionID) {
         case 1:
           dncImageText = "Do Not Call";
@@ -445,7 +488,8 @@ function ProcessPhoneDetails(
           dncImageText = "Location is not responsible for marketing";
           break;
         case 512:
-          dncImageText = "7 Days";
+          dncImageText = "On Hold Seven Days-Closer";
+          imagePath=phoneDNCImageUrl_tri_red;
           break;
         case 32768:
           dncImageText = "Out of Business";
@@ -455,27 +499,34 @@ function ProcessPhoneDetails(
           break;
         case 4194304:
           dncImageText = "Tracking Number";
+          imagePath=phoneDispositionImageUrl_red;
           break;
         case 1024:
-          dncImageText = "Call Back";
+          dncImageText = "Post Date-Do Not Call";
+          imagePath=phoneDispositionImageUrl_tri_red;
           break;   
         case 8388608:
-          dncImageText = "Bad Category To Call";
+          dncImageText = "Bad Category";
+          imagePath=phoneDispositionImageUrl_red;
           break;   
         case 16777216:
-          dncImageText = "Booked";
+          dncImageText = "Future Interest-Booked";
+          imagePath=phoneDispositionImageUrl_yellow;
           break; 
         case 33554432:
           dncImageText = "SALE- DNC";
+          imagePath=phoneDNCImageUrl_tri_black;
           break;
         case 67108864:
-          dncImageText = "Spanish Speaking Opener";
+          dncImageText = "Spanish speaking";
+          imagePath=phoneDispositionImageUrl_orange;
           break;
         case 134217728:
-          dncImageText = "Inbound Call Back";
+          dncImageText = "Inbound Callback";
           break;
         case 268435456:
-          dncImageText = "Scheduled Callback";
+          dncImageText = "Callback Scheduled";
+          imagePath=phoneDispositionImageUrl_yellow;
           break;
         default:
           dncImageText = "unknown disposition!";
@@ -483,7 +534,7 @@ function ProcessPhoneDetails(
       }
 
       return {
-        imageUrl: dncImage,
+        imageUrl: imagePath,
         removeAjax: false,
         altText:
           formattedLastDispositionDate +
@@ -492,30 +543,35 @@ function ProcessPhoneDetails(
       };
     } else if (phones[i].eDispositionID != null) {
       var reason = "";
+      let imagePath=despositionImage;
       switch (phones[i].eDispositionID) {
         case 2:
           reason = "Scheduled Call Back";
           break;
         case 32:
-          reason = "Email follow up requested";
+          reason = "Email Request";
           break;
         case 64:
           reason = "Prospect not interested";
+          imagePath=phoneDispositionImageUrl_yellow;
           break;
         case 128:
           reason = "Prospect hung up unexpectedly";
           break;
         case 256:
-          reason = "Final attempt";
+          reason = "Attempted Close";
+          imagePath=phoneDispositionImageUrl_tri_blue;
           break;
         case 2048:
           reason = "Reviews";
+          imagePath=phoneDispositionImageUrl_tri_blue;
           break;
         case 4096:
           reason = "Call back";
+          imagePath=phoneDispositionImageUrl_yellow;
           break;
         case 8192:
-          reason = "Sent to Voicemail";
+          reason = "No Answer-Voicemail";
           break;
         case 16384:
           reason = "Unknown dispo not found 16384";
@@ -527,13 +583,23 @@ function ProcessPhoneDetails(
           reason = "Gatekeeper";
           break;
         case 524288:
-          reason = "In Contract";
+          reason = "Future Interest-In contract";
+          imagePath=phoneDispositionImageUrl_yellow;
           break;
         case 1048576:
-          reason = "Ranking First Page";
+          reason = "On First Page";
+          imagePath=phoneDispositionImageUrl_yellow;
           break;
         case 2097152:
           reason = "Language Barrier";
+          break;
+        case 536870912:
+          dncImageText = "On Hold One Day-Opener";
+          imagePath=phoneDispositionImageUrl_red;
+          break;
+        case 1073741824:
+          dncImageText = "TO - Open Manager";
+          imagePath=phoneDispositionImageUrl_tri_purple;
           break;
         default:
           reason = "unknown disposition!";
@@ -541,7 +607,7 @@ function ProcessPhoneDetails(
       }
 
       return {
-        imageUrl: despositionImage,
+        imageUrl: imagePath,
         removeAjax: false,
         altText:
           formattedLastDispositionDate +
@@ -581,7 +647,15 @@ function UpdatePhoneDetails(
   currentCustomerImageUrl,
   dncImageUrl,
   dispositionImageUrl,
-  purpleImageUrl
+  purpleImageUrl,
+  phoneDNCImageUrl_tri_red,
+  phoneDispositionImageUrl_tri_purple,
+  phoneDispositionImageUrl_orange,
+  phoneDispositionImageUrl_tri_red,
+  phoneDispositionImageUrl_tri_blue,
+  phoneDispositionImageUrl_yellow,
+  phoneDispositionImageUrl_red,
+  phoneDNCImageUrl_tri_black
 ) {
   var phoneNodes = document.getElementsByClassName("rlv-container");
   var phones = [];
@@ -613,7 +687,15 @@ function UpdatePhoneDetails(
           currentCustomerImageUrl,
           dncImageUrl,
           dispositionImageUrl,
-          purpleImageUrl
+          purpleImageUrl,
+          phoneDNCImageUrl_tri_red,
+          phoneDispositionImageUrl_tri_purple,
+          phoneDispositionImageUrl_orange,
+          phoneDispositionImageUrl_tri_red,
+          phoneDispositionImageUrl_tri_blue,
+          phoneDispositionImageUrl_yellow,
+          phoneDispositionImageUrl_red,
+          phoneDNCImageUrl_tri_black
         );
         var imgNodes = processedPhoneNodes[resultObject[i].IPhone.toString()];
         if (!imgNodes) {

@@ -9,7 +9,15 @@ chrome.storage.sync.get(function (items) {
     var phoneDispositionImageUrl = chrome.runtime.getURL('phone-disposition.png');
     var phonePurple = chrome.runtime.getURL('phone-purple.png');
     var errorImageUrl = chrome.runtime.getURL('error.png');
- 
+    var phoneDNCImageUrl_tri_red=chrome.runtime.getURL("phone-dnc-triangle-red.png");
+    var phoneDispositionImageUrl_tri_purple=chrome.runtime.getURL("phone-disposition-triangle-purple.png");
+    var phoneDispositionImageUrl_orange=chrome.runtime.getURL("phone-disposition-orange.png");
+    var phoneDispositionImageUrl_tri_red=chrome.runtime.getURL("phone-disposition-triangle-red.png");
+    var phoneDispositionImageUrl_tri_blue=chrome.runtime.getURL("phone-disposition-triangle-blue.png");
+    var phoneDispositionImageUrl_yellow=chrome.runtime.getURL("phone-disposition-yellow.png");
+    var phoneDispositionImageUrl_red=chrome.runtime.getURL("phone-disposition-red.png");
+    var phoneDNCImageUrl_tri_black=chrome.runtime.getURL("phone-dnc-triangle-black.png ");
+    
     chrome.runtime.sendMessage({
         msg: "loadAjaxListner"
     });
@@ -31,7 +39,15 @@ chrome.storage.sync.get(function (items) {
             regex: items.regex,
             c2cURL: items.c2cURL,
             pbxExten: items.pbxExten,
-            loadDelay: items.loadDelay
+            loadDelay: items.loadDelay,
+            phoneDNCImageUrl_tri_red:phoneDNCImageUrl_tri_red,
+            phoneDispositionImageUrl_orange:phoneDispositionImageUrl_orange,
+            phoneDispositionImageUrl_tri_red:phoneDispositionImageUrl_tri_red,
+            phoneDispositionImageUrl_tri_blue:phoneDispositionImageUrl_tri_blue,
+            phoneDispositionImageUrl_yellow:phoneDispositionImageUrl_yellow,
+            phoneDispositionImageUrl_tri_purple:phoneDispositionImageUrl_tri_purple,
+            phoneDispositionImageUrl_red:phoneDispositionImageUrl_red,
+            phoneDNCImageUrl_tri_black:phoneDNCImageUrl_tri_black
         }));
         settingsDiv.id = 'rlv-settings';
         body.appendChild(settingsDiv);
@@ -84,7 +100,24 @@ function find_textNodesWithPhones(regexString, baseAddress, pbxExten, imageUrl, 
                                     }
 
                                     found = true;
-                                    var processPhoneResult = ProcessPhoneDetails(phoneDigits, processedPhones, imageUrl, currentCustomerImage, dncImage, dispositionImage);
+                                    var processPhoneResult = ProcessPhoneDetails(
+                                        phoneDigits,
+                                         processedPhones,
+                                        imageUrl,
+                                        currentCustomerImage,
+                                        dncImage,
+                                        dispositionImage,
+                                        phonePurple,
+                                        phoneDNCImageUrl_tri_red,
+                                        phoneDispositionImageUrl_tri_purple,
+                                        phoneDispositionImageUrl_orange,
+                                        phoneDispositionImageUrl_tri_red,
+                                        phoneDispositionImageUrl_tri_blue,
+                                        phoneDispositionImageUrl_yellow,
+                                        phoneDispositionImageUrl_red,
+                                        phoneDNCImageUrl_tri_black
+
+                                        );
                                     // fill template with required data
                                     var phoneDigits = resCopy[j].replace(/[^0-9]/g, '');
                                     var imgTag = imageCode.replace('{imageUrl}', processPhoneResult.imageUrl);

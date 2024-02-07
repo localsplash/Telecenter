@@ -19,6 +19,14 @@
         "phonestyle.css",
         "ajaxListener.js",
         "helper_functions.js",
+        "phone-dnc-triangle-red.png",
+        "phone-disposition-triangle-purple.png",
+        "phone-disposition-orange.png",
+        "phone-disposition-triangle-red.png",
+        "phone-disposition-triangle-blue.png",
+        "phone-disposition-yellow.png",
+        "phone-disposition-red.png",
+        "phone-dnc-triangle-black.png",
         "error.png"
       ],
       "matches": [
