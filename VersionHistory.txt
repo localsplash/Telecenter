@@ -116,7 +116,7 @@ Version: "2024.02.07.1"
 --Issue: Resolved - #21683 - C2C (Telcenter Chrome Ext) Ext Color Code Modifications
 --Solution: Resolved - #21683 - C2C (Telcenter Chrome Ext) Ext Color Code Modifications
 
-Version: "2024.02.07.2"
---Description: Yellow icon contrast too high
---Issue: Issue with yellow icon contrast
---Solution: Replaced yellow icon
+Version: "2024.03.28.1"
+--Description: Resolved - #21683 - Ext Color Code Modifications
+--Issue: C2C code not organized and verbose
+--Solution: Re-organized C2C code

@@ -401,9 +401,9 @@ function ProcessPhoneDetails(
   phones,
   imageUrl,
   currentCustomerImage,
-  dncImage,
-  despositionImage,
-  purpleImageUrl,
+  dncImage_round_red,
+  despositionImage_round_blue,
+  purpleImageUrl_round_purple,
   phoneDNCImageUrl_tri_red,
   phoneDispositionImageUrl_tri_purple,
   phoneDispositionImageUrl_orange,
@@ -413,196 +413,156 @@ function ProcessPhoneDetails(
   phoneDispositionImageUrl_red,
   phoneDNCImageUrl_tri_black
 ) {
-  for (var i = 0; i < phones.length; i++) {
-    if (phoneNumber == phones[i].IPhone) {
-      break;
-    }
-  }
-
-  if (i < phones.length) {
-    console.log("phone desposition Id",phones[i].eDispositionID);
-    var formattedLastDispositionDate = "";
-    var lastDispositionDate = phones[i].dtLastDisposition;
-    var dispositionCreatorUsername = phones[i].DispositionCreatorUsername;
-    if (lastDispositionDate != null) {
-      var timezone = phones[i].TimeZone;
-      formattedLastDispositionDate = constructFormattedLastDispositionDate(
-        lastDispositionDate,
-        timezone
-      );
-    }
-    if (phones[i].bIsPaying == 1) {
+  // Find the phone object where the phone number matches
+  const foundPhone = phones.find(phone => phone.IPhone === phoneNumber);
+  if (foundPhone) {
+    console.log("phone desposition Id",foundPhone.eDispositionID);
+    var formattedLastDispositionDate =foundPhone.dtLastDisposition != null? constructFormattedLastDispositionDate(
+      foundPhone.dtLastDisposition,
+      foundPhone.TimeZone
+    ) :"";
+    if (foundPhone.bIsPaying == 1) {
       return {
         imageUrl: currentCustomerImage,
         removeAjax: true,
         altText:
           formattedLastDispositionDate +
           "Current client" +
-          getDispositionUserName(dispositionCreatorUsername),
+          getDispositionUserName(foundPhone.DispositionCreatorUsername),
       };
-    } else if (phones[i].eDispositionID == 16) {
-      var purpleImageTxt = "";
-      switch (phones[i].eDispositionID) {
-        case 16:
-          purpleImageTxt = "TO - Open Manager";
-          break;
-        default:
-          purpleImageTxt = "unknown disposition!";
-          break;
-      }
-      return {
-        imageUrl: purpleImageUrl,
-        removeAjax: false,
-        altText:
-          formattedLastDispositionDate +
-          purpleImageTxt +
-          getDispositionUserName(dispositionCreatorUsername),
-      };
-    } else if (
-      phones[i].eDispositionID == 1 ||
-      phones[i].eDispositionID == 4 ||
-      phones[i].eDispositionID == 8 ||
-      phones[i].eDispositionID == 512 ||
-      phones[i].eDispositionID == 32768 ||
-      phones[i].eDispositionID == 131072 ||
-      phones[i].eDispositionID == 4194304 ||
-      phones[i].eDispositionID == 1024 ||
-      phones[i].eDispositionID == 8388608 ||
-      phones[i].eDispositionID == 16777216 ||
-      phones[i].eDispositionID == 33554432 ||
-      phones[i].eDispositionID == 67108864 ||
-      phones[i].eDispositionID == 134217728 ||
-      phones[i].eDispositionID == 268435456 
+    } 
+    else if (
+      foundPhone.eDispositionID != null
       
     ) {
-      var dncImageText = "";
-      let imagePath=dncImage;
-      switch (phones[i].eDispositionID) {
-        case 1:
-          dncImageText = "Do Not Call";
+      let imagePath="";
+      switch (foundPhone.eDispositionID) {
+        case 16:
+          reason = "TO - Open Manager";
+          imagePath=purpleImageUrl_round_purple;
           break;
-        case 4:
-          dncImageText = "Phone Disconnected";
+        case 1: //c
+          reason = "Do Not Call";
+          imagePath=dncImage_round_red;
           break;
-        case 8:
-          dncImageText = "Location is not responsible for marketing";
+        case 4://c
+          reason = "Phone Disconnected";
+          imagePath=dncImage_round_red;
           break;
-        case 512:
-          dncImageText = "On Hold Seven Days-Closer";
+        case 8://c
+          reason = "Multilocation";
+          imagePath=dncImage_round_red;
+          break;
+        case 512: //c
+          reason = "On Hold Seven Days-Closer";
           imagePath=phoneDNCImageUrl_tri_red;
           break;
-        case 32768:
-          dncImageText = "Out of Business";
+        case 32768://c
+          reason = "Out of Business";
+          imagePath=dncImage_round_red;
           break;
-        case 131072:
-          dncImageText = "Not a Business";
+        case 131072://c
+          reason = "Not a Business";
+          imagePath=dncImage_round_red;
           break;
-        case 4194304:
-          dncImageText = "Tracking Number";
+        case 4194304://c
+          reason = "Tracking Number";
           imagePath=phoneDispositionImageUrl_red;
           break;
-        case 1024:
-          dncImageText = "Post Date-Do Not Call";
+        case 1024: //c
+          reason = "Post Date-Do Not Call";
           imagePath=phoneDispositionImageUrl_tri_red;
           break;   
-        case 8388608:
-          dncImageText = "Bad Category";
+        case 8388608: //c
+          reason = "Bad Category";
           imagePath=phoneDispositionImageUrl_red;
           break;   
-        case 16777216:
-          dncImageText = "Future Interest-Booked";
+        case 16777216: //c
+          reason = "Future Interest-Booked";
           imagePath=phoneDispositionImageUrl_yellow;
           break; 
-        case 33554432:
-          dncImageText = "SALE- DNC";
+        case 33554432://c
+          reason = "Current client";
           imagePath=phoneDNCImageUrl_tri_black;
           break;
-        case 67108864:
-          dncImageText = "Spanish speaking";
+        case 67108864://c
+          reason = "Spanish speaking";
           imagePath=phoneDispositionImageUrl_orange;
           break;
-        case 134217728:
-          dncImageText = "Inbound Callback";
+        case 134217728://c
+          reason = "Inbound Callback";
+          imagePath=despositionImage_round_blue;
           break;
-        case 268435456:
-          dncImageText = "Callback Scheduled";
+        case 2: //c
+          reason = "Callback Scheduled";
           imagePath=phoneDispositionImageUrl_yellow;
           break;
-        default:
-          dncImageText = "unknown disposition!";
-          break;
-      }
-
-      return {
-        imageUrl: imagePath,
-        removeAjax: false,
-        altText:
-          formattedLastDispositionDate +
-          dncImageText +
-          getDispositionUserName(dispositionCreatorUsername),
-      };
-    } else if (phones[i].eDispositionID != null) {
-      var reason = "";
-      let imagePath=despositionImage;
-      switch (phones[i].eDispositionID) {
-        case 2:
-          reason = "Scheduled Call Back";
-          break;
-        case 32:
+        // case 2:
+        //   reason = "Scheduled Call Back";
+        //   imagePath=despositionImage;
+        //   break;
+        case 32://c
           reason = "Email Request";
+          imagePath=despositionImage_round_blue;
           break;
-        case 64:
-          reason = "Prospect not interested";
+        case 64://c
+          reason = "Not interested";
           imagePath=phoneDispositionImageUrl_yellow;
           break;
-        case 128:
-          reason = "Prospect hung up unexpectedly";
+        case 128://c
+          reason = "Hang up";
+          imagePath=despositionImage_round_blue;
           break;
-        case 256:
+        case 256://c
           reason = "Attempted Close";
           imagePath=phoneDispositionImageUrl_tri_blue;
           break;
-        case 2048:
+        case 2048: //c
           reason = "Reviews";
           imagePath=phoneDispositionImageUrl_tri_blue;
           break;
-        case 4096:
-          reason = "Call back";
+        case 4096://c
+          reason = "Future Interest-Call Back";
           imagePath=phoneDispositionImageUrl_yellow;
           break;
-        case 8192:
+        case 8192://c
           reason = "No Answer-Voicemail";
+          imagePath=despositionImage_round_blue;
           break;
-        case 16384:
-          reason = "Unknown dispo not found 16384";
-          break;
-        case 65536:
-          reason = "1 Day";
-          break;
-        case 262144:
+        // case 16384:
+        //   reason = "Unknown dispo not found 16384";
+        //   imagePath=despositionImage_round_blue;
+        //   break;
+        // case 65536:
+        //   reason = "1 Day";
+        //   imagePath=despositionImage_round_blue;
+        //   break;
+        case 262144://c
           reason = "Gatekeeper";
+          imagePath=despositionImage_round_blue;
           break;
-        case 524288:
+        case 524288://c
           reason = "Future Interest-In contract";
           imagePath=phoneDispositionImageUrl_yellow;
           break;
-        case 1048576:
+        case 1048576://c
           reason = "On First Page";
           imagePath=phoneDispositionImageUrl_yellow;
           break;
-        case 2097152:
-          reason = "Language Barrier";
-          break;
-        case 536870912:
-          dncImageText = "On Hold One Day-Opener";
+        // case 2097152:
+        //   reason = "Language Barrier";
+        //   break;
+        case 536870912: //c
+          reason = "On Hold One Day-Opener";
           imagePath=phoneDispositionImageUrl_red;
           break;
-        case 1073741824:
-          dncImageText = "TO - Open Manager";
+        case 1073741824://c
+          reason = "TO - Open Manager";
           imagePath=phoneDispositionImageUrl_tri_purple;
           break;
         default:
           reason = "unknown disposition!";
+          imagePath=dncImage_round_red;
           break;
       }
 
@@ -612,10 +572,11 @@ function ProcessPhoneDetails(
         altText:
           formattedLastDispositionDate +
           reason +
-          getDispositionUserName(dispositionCreatorUsername),
+          getDispositionUserName(foundPhone.DispositionCreatorUsername),
       };
     } else {
       // nothing, let go into default below
+      console.error("despoistion id not found")
     }
   }
 
