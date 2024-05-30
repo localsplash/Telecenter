@@ -120,3 +120,8 @@ Version: "2024.03.28.1"
 --Description: Resolved - #21683 - Ext Color Code Modifications
 --Issue: C2C code not organized and verbose
 --Solution: Re-organized C2C code
+
+Version: "2024.05.30.1"
+--Description: Resolved - #22678 Telecenter Extension to not impact text input boxes
+--Issue: The Chrome Telecenter Extension should not modify an input text box
+--Solution: Fixed on #22678
