@@ -119,6 +119,8 @@ function find_textNodesWithPhones(
       switch (curr.childNodes[i].nodeType) {
         case Node.TEXT_NODE:
           if (regex.test(curr.childNodes[i].textContent)) {
+           // console.log("***********text content*********"+curr.childNodes[i].textContent);
+            //console.log("***********outer html*********"+curr.childNodes[i]);
             var res = curr.childNodes[i].textContent.match(globalRegex);
             var nodePromice = new Promise(function (resolve, reject) {
               var currCopy = curr;
@@ -142,6 +144,12 @@ function find_textNodesWithPhones(
                   ) {
                     continue;
                   }
+                  //ignore the google search box
+                  else if (
+                    currCopy.getAttribute("aria-label") === "Search"
+                  ) {
+                    continue;
+                  }
 
                   found = true;
                   // fill template with required data
@@ -149,6 +157,7 @@ function find_textNodesWithPhones(
                   var imgTag = imageCode.replace("{imageUrl}", errorImageUrl);
                   imgTag = imgTag.replace(/{phoneNumber}/g, resCopy[j]);
                   imgTag = imgTag.replace(/{phoneDigits}/g, phoneDigits);
+                  //console.log("outer**********"+currCopy.outerHTML )
                   currCopy.innerHTML = currCopy.innerHTML.replace(
                     resCopy[j],
                     resCopy[j] + imgTag
