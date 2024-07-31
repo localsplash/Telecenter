@@ -7,7 +7,7 @@
   "name": "Relevant Telecenter Dialer",
   "short_name": "RATelecenter",
   "description": "Allows single-click calling, business listing research and Manager CRM integration for telecenter digital marketing representatives.",
-  "version": "2024.05.30.1",
+  "version": "2024.07.31.1",
   "web_accessible_resources": [
     {
       "resources": [
@@ -96,7 +96,8 @@
         "*://*.whereorg.com/*",
         "*://*.pennysaverusa.com/*",
         "*://*.contractorsup.com/*",
-        "*://*.claimspages.com/*"
+        "*://*.claimspages.com/*",
+        "*://*.thebluebook.com/*"
   ],
   "icons": {
     "16": "phone16x16.png",
@@ -160,7 +161,8 @@
         "*://*.whereorg.com/*",
         "*://*.pennysaverusa.com/*",
         "*://*.contractorsup.com/*",
-        "*://*.claimspages.com/*"
+        "*://*.claimspages.com/*",
+        "*://*.thebluebook.com/*"
       ],
       "js": [
         "contentscript.js"
