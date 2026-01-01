@@ -130,3 +130,13 @@ Version: "2024.07.31.1"
 --Description: Resolved - #23297 Enable C2C for a new directory "thebluebook.com"
 --Issue: Resolved by adding thebluebook.com to manifest file
 --Solution: Fixed on #23297
+
+Version: "2025.12.22.1"
+--Description: Updated GetPhones API endpoint - Azure DevOps (#26793)
+--Issue: API endpoint changed from svc.relevantads.com to infrastructure.localsplash.com
+--Solution: Updated getPhones() function to use new endpoint (https://infrastructure.localsplash.com/api/Telcenter/GetPhones) with lowercase "phones" parameter
+
+Version: "2025.12.22.2"
+--Description: Added formatted Google search option - Azure DevOps (#26587)
+--Issue: Need ability to search phone numbers on Google with formatted display (XXX) XXX-XXXX
+--Solution: Added "Search Phone on Google Formatted" context menu option that searches with (XXX) XXX-XXXX format

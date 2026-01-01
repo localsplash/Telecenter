@@ -110,6 +110,7 @@ function find_textNodesWithPhones(
     '<div class="rlv-menu-container"><a href="#" data-preview="NO" data-phone-number="{phoneDigits}" class="rlv-phone-call">Call</a>' +
     '<a href="#" data-preview="YES" data-phone-number="{phoneDigits}" class="rlv-phone-call">Preview</a>' +
     '<a href="https://www.google.com/search?q={phoneDigits}" target="goog">Search Phone on Google</a>' +
+    '<a href="https://www.google.com/search?q={phoneFormatted}" target="goog">Search Phone on Google Formatted</a>' +
     '<a href="https://manager.localsplash.com/telecenter/phoneopen.aspx?p={phoneDigits}" target="manager">Manager open</a></div>' +
     "</span>";
   var nodePromices = [];
@@ -154,9 +155,14 @@ function find_textNodesWithPhones(
                   found = true;
                   // fill template with required data
                   var phoneDigits = resCopy[j].replace(/[^0-9]/g, "");
+                  // Format phone number as (XXX) XXX-XXXX
+                  var phoneFormatted = phoneDigits.length === 10 
+                    ? "(" + phoneDigits.substring(0, 3) + ") " + phoneDigits.substring(3, 6) + "-" + phoneDigits.substring(6, 10)
+                    : phoneDigits;
                   var imgTag = imageCode.replace("{imageUrl}", errorImageUrl);
                   imgTag = imgTag.replace(/{phoneNumber}/g, resCopy[j]);
                   imgTag = imgTag.replace(/{phoneDigits}/g, phoneDigits);
+                  imgTag = imgTag.replace(/{phoneFormatted}/g, phoneFormatted);
                   //console.log("outer**********"+currCopy.outerHTML )
                   currCopy.innerHTML = currCopy.innerHTML.replace(
                     resCopy[j],
@@ -604,9 +610,10 @@ function getPhones(phoneNumbers) {
         resolve(xhr.responseText); // Another callback here
       }
     };
-    xhr.open("POST", "https://svc.relevantads.com/Telcenter/GetPhones");
+    xhr.open("POST", "https://infrastructure.localsplash.com/api/Telcenter/GetPhones");
+    xhr.setRequestHeader("accept", "text/plain");
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(JSON.stringify({ Phones: phoneNumbers }));
+    xhr.send(JSON.stringify({ phones: phoneNumbers }));
   });
 
   return phonesPromise;
