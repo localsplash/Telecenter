@@ -7,7 +7,7 @@
   "name": "Relevant Telecenter Dialer",
   "short_name": "RATelecenter",
   "description": "Allows single-click calling, business listing research and Manager CRM integration for telecenter digital marketing representatives.",
-  "version": "2025.12.22.1",
+  "version": "2025.12.22.2",
   "web_accessible_resources": [
     {
       "resources": [
