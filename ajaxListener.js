@@ -603,20 +603,28 @@ function ProcessPhoneDetails(
 }
 
 function getPhones(phoneNumbers) {
-  var phonesPromise = new Promise(function (resolve, reject) {
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState == 4 && xhr.status == 200) {
-        resolve(xhr.responseText); // Another callback here
+  return new Promise(function (resolve, reject) {
+    console.log("Sending getPhones message to background script", phoneNumbers);
+    chrome.runtime.sendMessage(
+      { 
+        action: "getPhones", 
+        phones: phoneNumbers 
+      },
+      function(response) {
+        console.log("Received response from background script:", response);
+        if (chrome.runtime.lastError) {
+          console.error("Chrome runtime error:", chrome.runtime.lastError);
+          reject(chrome.runtime.lastError.message);
+          return;
+        }
+        if (response && response.success) {
+          resolve(response.data);
+        } else {
+          reject(response ? response.error : "No response from background script");
+        }
       }
-    };
-    xhr.open("POST", "https://infrastructure.localsplash.com/api/Telcenter/GetPhones");
-    xhr.setRequestHeader("accept", "text/plain");
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(JSON.stringify({ phones: phoneNumbers }));
+    );
   });
-
-  return phonesPromise;
 }
 
 function UpdatePhoneDetails(
@@ -705,6 +713,8 @@ function UpdatePhoneDetails(
         processedPhoneNodes[resultObject[i].IPhone.toString()] = null;
       }
     }
+  }).catch(function (error) {
+    console.error("Failed to get phone details:", error);
   });
 }
 
