@@ -140,3 +140,10 @@ Version: "2025.12.22.2"
 --Description: Added formatted Google search option - Azure DevOps (#26587)
 --Issue: Need ability to search phone numbers on Google with formatted display (XXX) XXX-XXXX
 --Solution: Added "Search Phone on Google Formatted" context menu option that searches with (XXX) XXX-XXXX format
+
+Version: "2026.1.2.1"
+--Description: Fixed CORS policy error blocking API calls to infrastructure.localsplash.com
+--Issue: Content scripts making direct API calls to infrastructure.localsplash.com were blocked by CORS policy
+         when running on manager.localsplash.com domain.
+--Solution: Moved API calls from content script to background script which can make cross-origin requests
+            using the extension's host permissions. Added comprehensive error handling and logging for debugging.
